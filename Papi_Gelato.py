@@ -98,7 +98,7 @@ def smaken(b):
     print('U krijgt ' + str(chocolade) + ' bolletjes chocolade')
     print('U krijgt ' + str(aardbij) + ' bolletjes aardbij')
     print('U krijgt ' + str(munt) + ' bolletjes munt')
-    time.sleep(3)
+    time.sleep(5)
     clear()
     bestellen()
 
