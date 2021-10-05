@@ -105,16 +105,39 @@ def smaken(bo,ba,ho):
     time.sleep(5)
     bo = bo - 1
     clear()
-    bestellen(bo,ba,ho)
+    toppings(bo,ba,ho)
 
+def toppings(bo,ba,ho):
+    print('Wat voor topping wilt U?')
+    print('A) Geen')
+    print('B) Slagroom')
+    print('C) Sprinkels')
+    print('D) Caramel Saus')
+    topping = input('Welke topping wilt U? ')
+    if topping == 'A':
+        to = 0
+    elif topping == 'B':
+        to = 0.50
+    elif topping == 'C':
+        to = 0.30
+    elif topping == 'D':
+        if ba >= 1:
+            to = 0.90
+        elif ho >= 1:
+            0.60
+    clear()
+    bestellen(bo,ba,ho,to)
 
-def bestellen(bo,ba,ho):
+def bestellen(bo,ba,ho,to):
     global bol
     global bak
     global hoorn
+    global topping
+    
     bol = bol + bo
     bak = bak + ba
     hoorn = hoorn + ho
+    topping = topping + to
 
     print('Wilt u nog meer bestellen? J/N')
     bestelling = input('')
@@ -123,13 +146,13 @@ def bestellen(bo,ba,ho):
     elif bestelling == 'N':
         time.sleep(1)
         clear()
-        receipt(bol,bak,hoorn)
+        receipt(bol,bak,hoorn,to)
     else:
         print('Sorry, ik snap het niet')
         time.sleep(1)
         bestellen()
 
-def receipt(bo,ba,ho):
+def receipt(bo,ba,ho,to):
     boll = float(bo * 1.10)
     bakje = float(ba * 1.25)
     hoorntje = float(ho * 0.75)
@@ -143,6 +166,8 @@ def receipt(bo,ba,ho):
         print('bakjes       ' + str(ba) + ' X €1.10    = €' + str(bakje))
     if hoorntje > 0:
         print('hoorntjes    ' + str(ho) + ' X €1.10    = €' + str(hoorntje))
+    if to > 0:
+        print('toppings     ' + str(to) + ' X €1.10    = €' + str(to))
     print('                         ---------- +')
     print('Totaal                    = €' + str(eind))
 
@@ -155,10 +180,7 @@ def receipt(bo,ba,ho):
 bol = 0
 bak = 0
 hoorn = 0
-
-bo = 0
-ba = 0
-ho = 0
+topping = 0
 
 print('Wekom bij Papi Gelato')
 time.sleep(2)
