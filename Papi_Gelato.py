@@ -13,17 +13,18 @@ def stop():
     clear()
     exit()
 
-def stap2(b):
-    print('Om terug te gaan type: back')
-    print('Om te stoppen type: quit')
-    print('Wilt u de ' + str(b) + ' bolletjes in een hoorntje of een bakje? ')
+def stap2(bo):
+
+    print('Wilt u de ' + str(bo) + ' bolletjes in een hoorntje of een bakje? ')
     keuze = input('')
     if keuze == 'bakje':
         clear()
-        bakjes(b)
+        ba = 1
+        bakjes(bo,ba)
     elif keuze == 'hoorntje':
         clear()
-        hoorntjes(b)
+        ho = 1
+        hoorntjes(bo,ho)
     elif keuze == 'back':
         bolletjes()
     elif keuze == 'quit':
@@ -32,21 +33,23 @@ def stap2(b):
         print('Sorry, dat snap ik niet')
         time.sleep(1)
         clear()
-        return stap2(b)
+        return stap2(bo)
 
 
-def hoorntjes(b):
-    print('U krijgt een hoorntje met ' + str(b) + ' bolletjes')
+def hoorntjes(bo,ho):
+    print('U krijgt een hoorntje met ' + str(bo) + ' bolletjes')
     time.sleep(2)
     clear()
-    smaken(b)
+    ba = 0
+    smaken(bo,ba,ho)
 
 
-def bakjes(b):
-    print('U krijgt een bakje met ' + str(b) + ' bolletjes')
+def bakjes(bo,ba):
+    print('U krijgt een bakje met ' + str(bo) + ' bolletjes')
     time.sleep(2)
     clear()
-    smaken(b)
+    ho = 0
+    smaken(bo,ba,ho)
 
 
 def bolletjes():
@@ -60,27 +63,28 @@ def bolletjes():
     elif int(bolletje) <= 8:
         time.sleep(0.5)
         clear()
-        bakjes(bolletje)
+        ba = 1
+        bakjes(bolletje, ba)
     elif bolletje > 8:
         print('Sorry, zulke grote bakken hebben wij niet')
         time.sleep(1)
         clear()
         return bolletjes()
 
-def smaken(b):
+def smaken(bo,ba,ho):
 
     vanille = 0
     chocolade = 0
     munt = 0
     aardbij = 0
 
-    b = b + 1
+    bo = bo + 1
     print('Smaken:')
     print('vannille     - V')
     print('chocolade    - C')
     print('aardbij      - A')
     print('munt         - M')
-    for s in range(1,b):
+    for s in range(1,bo):
         smaak = input('Welke smaak wilt u voor bolletje ' + str(s) + ': ')
         if smaak == 'V':
             vanille = vanille + 1
@@ -91,19 +95,27 @@ def smaken(b):
         elif smaak == 'M':
             munt = munt + 1
         else:
-            b = b - 1
+            bo = bo - 1
             clear()
-            return smaken(b)
-    print('U krijgt ' + str(vanille) + ' bolletjes vanille')
-    print('U krijgt ' + str(chocolade) + ' bolletjes chocolade')
-    print('U krijgt ' + str(aardbij) + ' bolletjes aardbij')
-    print('U krijgt ' + str(munt) + ' bolletjes munt')
+            return smaken(bo)
+    print('U krijgt ' + str(vanille) + ' bolletje(s) vanille')
+    print('U krijgt ' + str(chocolade) + ' bolletje(s) chocolade')
+    print('U krijgt ' + str(aardbij) + ' bolletje(s) aardbij')
+    print('U krijgt ' + str(munt) + ' bolletje(s) munt')
     time.sleep(5)
+    bo = bo - 1
     clear()
-    bestellen()
+    bestellen(bo,ba,ho)
 
 
-def bestellen():
+def bestellen(bo,ba,ho):
+    global bol
+    global bak
+    global hoorn
+    bol = bol + bo
+    bak = bak + ba
+    hoorn = hoorn + ho
+
     print('Wilt u nog meer bestellen? J/N')
     bestelling = input('')
     if bestelling == 'J':
@@ -111,14 +123,43 @@ def bestellen():
     elif bestelling == 'N':
         time.sleep(1)
         clear()
-        print('Bedankt en tot ziens!')
-        time.sleep(1)
-        clear()
-        exit()
+        receipt(bol,bak,hoorn)
     else:
         print('Sorry, ik snap het niet')
         time.sleep(1)
         bestellen()
 
+def receipt(bo,ba,ho):
+    boll = float(bo * 1.10)
+    bakje = float(ba * 1.25)
+    hoorntje = float(ho * 0.75)
+
+    eind = float(boll + bakje + hoorntje)
+
+    print('---------["Papi Gelato"]---------')
+    if boll > 0:
+        print('bolletjes    ' + str(bo) + ' X €1.10    = €' + str(boll))
+    if bakje > 0:
+        print('bakjes       ' + str(ba) + ' X €1.10    = €' + str(bakje))
+    if hoorntje > 0:
+        print('hoorntjes    ' + str(ho) + ' X €1.10    = €' + str(hoorntje))
+    print('                         ---------- +')
+    print('Totaal                    = €' + str(eind))
+
+    time.sleep(5)
+    print('Bedankt en tot ziens!')
+    time.sleep(1)
+    clear()
+    exit()
+
+bol = 0
+bak = 0
+hoorn = 0
+
+bo = 0
+ba = 0
+ho = 0
+
 print('Wekom bij Papi Gelato')
+time.sleep(2)
 bolletjes()
