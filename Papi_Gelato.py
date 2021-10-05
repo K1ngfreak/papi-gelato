@@ -30,7 +30,7 @@ def stap2(bo):
     elif keuze == 'quit':
         stop()
     else:
-        print('Sorry, dat snap ik niet')
+        print('Sorry dat is geen optie die we aanbieden...')
         time.sleep(1)
         clear()
         return stap2(bo)
@@ -66,7 +66,7 @@ def bolletjes():
         ba = 1
         bakjes(bolletje, ba)
     elif bolletje > 8:
-        print('Sorry, zulke grote bakken hebben wij niet')
+        print('Sorry dat is geen optie die we aanbieden...')
         time.sleep(1)
         clear()
         return bolletjes()
@@ -75,7 +75,6 @@ def smaken(bo,ba,ho):
 
     vanille = 0
     chocolade = 0
-    munt = 0
     aardbij = 0
 
     bo = bo + 1
@@ -83,7 +82,6 @@ def smaken(bo,ba,ho):
     print('vannille     - V')
     print('chocolade    - C')
     print('aardbij      - A')
-    print('munt         - M')
     for s in range(1,bo):
         smaak = input('Welke smaak wilt u voor bolletje ' + str(s) + ': ')
         if smaak == 'V':
@@ -92,16 +90,15 @@ def smaken(bo,ba,ho):
             chocolade = chocolade + 1
         elif smaak == 'A':
             aardbij = aardbij + 1
-        elif smaak == 'M':
-            munt = munt + 1
         else:
+            print('Sorry dat is geen optie die we aanbieden...')
             bo = bo - 1
+            time.sleep(1)
             clear()
             return smaken(bo)
     print('U krijgt ' + str(vanille) + ' bolletje(s) vanille')
     print('U krijgt ' + str(chocolade) + ' bolletje(s) chocolade')
     print('U krijgt ' + str(aardbij) + ' bolletje(s) aardbij')
-    print('U krijgt ' + str(munt) + ' bolletje(s) munt')
     time.sleep(5)
     bo = bo - 1
     clear()
@@ -130,6 +127,8 @@ def toppings(bo,ba,ho):
         elif ho >= 1:
             to = 0.60
             top = 1
+    else:
+        print('Sorry dat is geen optie die we aanbieden...')
     clear()
     bestellen(bo,ba,ho,to,top)
 
@@ -155,12 +154,12 @@ def bestellen(bo,ba,ho,to,top):
         clear()
         receipt(bol,bak,hoorn,topping,totalTopping)
     else:
-        print('Sorry, ik snap het niet')
+        print('Sorry dat is geen optie die we aanbieden...')
         time.sleep(1)
         bestellen()
 
 def receipt(bo,ba,ho,to,top):
-    boll = float(bo * 1.10)
+    boll = float(bo * 0.95)
     bakje = float(ba * 1.25)
     hoorntje = float(ho * 0.75)
 
