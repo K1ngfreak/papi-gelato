@@ -116,28 +116,35 @@ def toppings(bo,ba,ho):
     topping = input('Welke topping wilt U? ')
     if topping == 'A':
         to = 0
+        top = 1
     elif topping == 'B':
         to = 0.50
+        top = 1
     elif topping == 'C':
         to = 0.30
+        top = 1
     elif topping == 'D':
         if ba >= 1:
             to = 0.90
+            top = 1
         elif ho >= 1:
-            0.60
+            to = 0.60
+            top = 1
     clear()
-    bestellen(bo,ba,ho,to)
+    bestellen(bo,ba,ho,to,top)
 
-def bestellen(bo,ba,ho,to):
+def bestellen(bo,ba,ho,to,top):
     global bol
     global bak
     global hoorn
     global topping
+    global totalTopping
     
     bol = bol + bo
     bak = bak + ba
     hoorn = hoorn + ho
     topping = topping + to
+    totalTopping = totalTopping + top
 
     print('Wilt u nog meer bestellen? J/N')
     bestelling = input('')
@@ -146,18 +153,18 @@ def bestellen(bo,ba,ho,to):
     elif bestelling == 'N':
         time.sleep(1)
         clear()
-        receipt(bol,bak,hoorn,to)
+        receipt(bol,bak,hoorn,topping,totalTopping)
     else:
         print('Sorry, ik snap het niet')
         time.sleep(1)
         bestellen()
 
-def receipt(bo,ba,ho,to):
+def receipt(bo,ba,ho,to,top):
     boll = float(bo * 1.10)
     bakje = float(ba * 1.25)
     hoorntje = float(ho * 0.75)
 
-    eind = float(boll + bakje + hoorntje)
+    eind = float(boll + bakje + hoorntje + to)
 
     print('---------["Papi Gelato"]---------')
     if boll > 0:
@@ -167,7 +174,7 @@ def receipt(bo,ba,ho,to):
     if hoorntje > 0:
         print('hoorntjes    ' + str(ho) + ' X €1.10    = €' + str(hoorntje))
     if to > 0:
-        print('toppings     ' + str(to) + ' X €1.10    = €' + str(to))
+        print('toppings     ' + str(top) + ' X €1.10    = €' + str(to))
     print('                         ---------- +')
     print('Totaal                    = €' + str(eind))
 
@@ -181,6 +188,7 @@ bol = 0
 bak = 0
 hoorn = 0
 topping = 0
+totalTopping = 0
 
 print('Wekom bij Papi Gelato')
 time.sleep(2)
