@@ -84,11 +84,11 @@ def smaken(bo,ba,ho):
     print('aardbij      - A')
     for s in range(1,bo):
         smaak = input('Welke smaak wilt u voor bolletje ' + str(s) + ': ')
-        if smaak == 'V':
+        if smaak == 'V' or smaak == 'v':
             vanille = vanille + 1
-        elif smaak == 'C':
+        elif smaak == 'C' or smaak == 'c':
             chocolade = chocolade + 1
-        elif smaak == 'A':
+        elif smaak == 'A' or smaak == 'a':
             aardbij = aardbij + 1
         else:
             print('Sorry dat is geen optie die we aanbieden...')
@@ -111,16 +111,16 @@ def toppings(bo,ba,ho):
     print('C) Sprinkels')
     print('D) Caramel Saus')
     topping = input('Welke topping wilt U? ')
-    if topping == 'A':
+    if topping == 'A' or topping == 'a':
         to = 0
         top = 1
-    elif topping == 'B':
+    elif topping == 'B' or topping == 'b':
         to = 0.50
         top = 1
-    elif topping == 'C':
+    elif topping == 'C' or topping == 'c':
         to = 0.30
         top = 1
-    elif topping == 'D':
+    elif topping == 'D' or topping == 'd':
         if ba >= 1:
             to = 0.90
             top = 1
@@ -146,7 +146,7 @@ def bestellen(bo,ba,ho,to,top):
     totalTopping = totalTopping + top
 
     print('Wilt u nog meer bestellen? J/N')
-    bestelling = input('')
+    bestelling = input('').upper()
     if bestelling == 'J':
         bolletjes()
     elif bestelling == 'N':
